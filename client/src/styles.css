@@ -1,0 +1,140 @@
+:root {
+  color-scheme: light;
+  --bg: #f8f9fa;
+  --surface: #ffffff;
+  --text: #202940;
+  --muted: #6c757d;
+  --surface-border: rgba(108, 117, 125, 0.12);
+  --shadow: rgba(15, 23, 42, 0.08);
+  --hero-bg: rgba(255, 255, 255, 0.7);
+  --navbar-bg: #ffffff;
+  --footer-bg: #ffffff;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0d1220;
+  --surface: #161d2f;
+  --text: #e9eef6;
+  --muted: #a9b2c3;
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --shadow: rgba(0, 0, 0, 0.32);
+  --hero-bg: rgba(19, 31, 53, 0.92);
+  --navbar-bg: #141b2f;
+  --footer-bg: #141b2f;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, rgba(88, 116, 255, 0.08), transparent 35%),
+    var(--bg);
+  color: var(--text);
+}
+
+.app-content {
+  padding-top: 100px;
+  padding-bottom: 60px;
+}
+
+.hero-banner {
+  background: var(--hero-bg);
+  border-radius: 18px;
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 28px 55px var(--shadow);
+}
+
+.hero-banner h1,
+.hero-banner p {
+  margin-bottom: 0;
+}
+
+.hero-banner .feature-list {
+  gap: 1rem;
+}
+
+.navbar,
+.app-footer {
+  background: var(--navbar-bg);
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand,
+.app-footer {
+  color: var(--text);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 18px;
+}
+
+.card.shadow-sm {
+  box-shadow: 0 22px 45px var(--shadow);
+}
+
+.recipe-card {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.16);
+}
+
+.recipe-card-image {
+  min-height: 220px;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-img-top {
+  object-fit: cover;
+  max-height: 320px;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+.btn-primary,
+.btn-success,
+.btn-outline-secondary {
+  border-radius: 50px;
+}
+
+.form-control,
+textarea.form-control {
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgba(108, 117, 125, 0.16);
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--surface-border);
+}
+
+.form-control::placeholder,
+textarea.form-control::placeholder {
+  color: var(--muted);
+}
+
+.form-control:focus,
+textarea.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(88, 116, 255, 0.16);
+}
+
+.app-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.alert {
+  border-radius: 14px;
+}
+
+button.btn-link {
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .hero-banner {
+    border-radius: 14px;
+  }
+}
