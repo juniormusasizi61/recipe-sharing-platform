@@ -26,6 +26,7 @@ export default function Shell({ user, onLogout, children }) {
           <Link className="navbar-brand fw-bold mb-2 mb-lg-0" to="/">RecipeShare</Link>
           <div className="d-flex flex-wrap align-items-center gap-2">
             <Link className="nav-link text-secondary" to="/">Home</Link>
+            {user && <Link className="nav-link text-secondary" to="/profile">Profile</Link>}
             {user && <Link className="nav-link text-secondary" to="/create">New Recipe</Link>}
             <button
               className="btn btn-sm btn-outline-secondary"

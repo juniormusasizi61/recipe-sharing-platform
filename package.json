@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"cd backend && npm run dev\" \"cd client && npm run dev\""
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd client && npm run dev\"",
+    "build": "cd client && npm run build",
+    "start": "cd backend && npm start",
+    "test:backend": "cd backend && npm test"
   },
   "devDependencies": {
     "concurrently": "^9.0.0"

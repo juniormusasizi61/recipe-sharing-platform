@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../api.js';
 
 const DEFAULT_IMAGE = 'https://via.placeholder.com/700x400?text=Recipe+Image+Not+Found';
 
 export default function RecipeDetailsPage({ token, user }) {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState(null);
   const [imageUrl, setImageUrl] = useState(DEFAULT_IMAGE);
   const [imageStatus, setImageStatus] = useState('loading');
@@ -48,6 +49,29 @@ export default function RecipeDetailsPage({ token, user }) {
     }
   };
 
+  const handleDelete = async () => {
+    if (!window.confirm('Are you sure you want to delete this recipe? This action cannot be undone.')) {
+      return;
+    }
+
+    if (!token) {
+      setError('You must be logged in to delete a recipe.');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      await api.delete(`/api/recipes/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.error || 'Unable to delete recipe.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // This page loads the recipe and performs a best-effort external image lookup.
   // `imageStatus` tracks whether the image was loaded from TheMealDB ('loaded')
   // or whether a placeholder is used ('fallback'). If the external service
@@ -77,6 +101,11 @@ export default function RecipeDetailsPage({ token, user }) {
         <div className="d-flex flex-wrap gap-2">
           <Link to="/" className="btn btn-outline-secondary">Back to recipes</Link>
           {isOwner && <Link to={`/recipes/${id}/edit`} className="btn btn-primary">Edit Recipe</Link>}
+          {isOwner && (
+            <button type="button" className="btn btn-danger" onClick={handleDelete} disabled={loading}>
+              {loading ? 'Deleting...' : 'Delete Recipe'}
+            </button>
+          )}
         </div>
       </div>
       <div className="row g-4">

@@ -16,6 +16,7 @@ export default function RecipeFormPage({ token, user, editMode = false }) {
     if (editMode && id) {
       const loadRecipe = async () => {
         try {
+          // Preload existing recipe data when editing.
           const response = await api.get(`/api/recipes/${id}`);
           setTitle(response.data.title);
           setIngredients(response.data.ingredients.join(', '));
